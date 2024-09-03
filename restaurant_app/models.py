@@ -5,10 +5,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils import timezone
 from django.contrib.auth.hashers import make_password
-from .utils import default_time_period
-import logging
-
-logger = logging.getLogger(__name__)
 
 
 class User(AbstractUser):
@@ -189,7 +185,6 @@ class Bill(models.Model):
         return f"Bill for order {self.order.id}"
     
     def delete(self, *args, **kwargs):
-        logger.error(f"Bill {self.pk} is being deleted!")
         super().delete(*args, **kwargs)
 
     # def save(self, *args, **kwargs):
@@ -491,6 +486,11 @@ def update_mess_on_transaction_save(sender, instance, **kwargs):
                 mess.save()
         except Exception as e:
             print(f"Error updating mess on transaction save: {e}")
+
+
+def default_time_period():
+    return timezone.now() + timedelta(days=30)
+
 
 class CreditUser(models.Model):
     username = models.CharField(max_length=100)

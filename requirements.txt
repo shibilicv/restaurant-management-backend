@@ -6,7 +6,6 @@ environs
 django-filter
 Pillow
 reportlab
-twilio
 django-unfold
 whitenoise
 gunicorn
