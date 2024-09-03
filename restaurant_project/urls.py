@@ -88,7 +88,7 @@ router.register(r'income-statements', IncomeStatementViewSet)
 router.register(r'balance-sheets', BalanceSheetViewSet)
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("", admin.site.urls),
     path("api/", include(router.urls)),
     path("api/login-passcode/", PasscodeLoginView.as_view(), name="login-passcode"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
